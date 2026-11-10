@@ -1,40 +1,40 @@
 {
   "scenes": {
-    "scene1": {
+    "scene1_intro": {
       "title": "The Channel Noise Paradox",
       "voice": "bm_george",
       "speed": 1.0,
-      "text": "When information travels through physical copper or fiber, thermal noise and voltage sags inevitably corrupt electrical states. A simple parity check computes the sum modulo two, but if two bits flip in transit, the parity remains identical—the error passes completely undetected. To construct an unforgeable barrier against burst errors, network architectures shift away from ordinary arithmetic into polynomial algebra. This is the Cyclic Redundancy Check."
+      "text": "When information travels through physical copper or optical fiber, channel noise inevitably corrupts digital bits. A simple parity check computes the sum modulo two, but if two bits flip in transit, the parity remains identical—the error passes completely undetected. To construct an unforgeable defense against burst errors, we shift away from ordinary arithmetic into polynomial algebra. This is the Cyclic Redundancy Check."
     },
-    "scene2": {
+    "scene2_mathTheory": {
       "title": "Field Theory & Modulo-2 Arithmetic",
       "voice": "bm_george",
       "speed": 1.0,
-      "text": "At the foundation of CRC lies the Galois Field of two elements, GF(2). In this algebraic domain, addition and subtraction are completely identical, both collapsing into the exclusive OR operation. One plus one is zero. Zero minus one is one. There are no carries between columns and no borrows across digits. Long division under modulo two is not about numeric magnitude, but pattern matching: if the leading bit is a one, we XOR with our divisor. If it is zero, we slide our window forward."
+      "text": "At the foundation of CRC lies the Galois Field of two elements, GF(2). In this algebraic domain, addition and subtraction are completely identical, both collapsing into the exclusive OR operation. One plus one is zero. Zero minus one is one. There are no carries between columns and no borrows across digits. Long division under modulo two is not about numeric magnitude, but pattern matching: if the leading bit is a one, we XOR with our divisor. If it is zero, we XOR with seventeen zeros, shifting our window forward."
     },
-    "scene3": {
-      "title": "Structuring the Dividend & The Degree-16 Generator",
+    "scene3_frameSetup": {
+      "title": "Structuring the Dividend & Degree-16 Generator",
       "voice": "bm_george",
       "speed": 1.0,
-      "text": "Consider our exact ten-bit message from the laboratory: one one zero one zero one one zero one one. To protect these bits, we deploy CRC-CCITT, defined by the degree-sixteen polynomial x to the sixteenth plus x to the twelfth plus x to the fifth plus one. Written as a bit vector, this yields a seventeen-bit divisor: one zero zero zero one zero zero zero zero zero zero one zero zero zero zero one. Because the polynomial degree is sixteen, we append exactly sixteen zeros to our original payload. These sixteen appended slots represent the mathematical space where our checksum will be forged."
+      "text": "Consider our exact ten-bit payload from the laboratory: 1101011011. To protect these bits, we deploy CRC-CCITT, defined by the degree-sixteen polynomial x to the sixteenth plus x to the twelfth plus x to the fifth plus one. Written as a bit vector, this yields our seventeen-bit divisor: 10001000000100001. Because the polynomial degree is sixteen, we append exactly sixteen zeros to our original dataword. These sixteen appended slots represent the mathematical space where our checksum will be forged."
     },
-    "scene4": {
-      "title": "The Modulo-2 Long Division Engine (Sender Side)",
+    "scene4_divisionWalkthrough": {
+      "title": "Sender Long Division Walkthrough",
       "voice": "bm_george",
       "speed": 1.0,
-      "text": "Now observe the division machinery in motion. We align our seventeen-bit generator directly underneath the first leading one of our augmented dividend. Column by column, we execute exclusive OR. The leading bit cancels to zero. We shift past consecutive leading zeros, pull down the next available bit from our dividend, and evaluate the head. If it is a one, the generator strikes again. If it is a zero, we pull down the subsequent bit without altering the current remainder. Watch as the ladder cascades downward. The twenty-six bits progressively collapse until every single bit of the original payload has been drawn down. What survives at the base is our sixteen-bit remainder: one zero one one one one one zero one one zero zero one one zero one. We insert this exact remainder into the sixteen placeholder positions to produce our final transmitted codeword."
+      "text": "Observe the classic long division bracket. On the left is our seventeen-bit generator polynomial: 10001000000100001. Under the line sits our twenty-six-bit dividend: ten data bits followed by sixteen zeros. Look at our leading bit. It is a one. Because it is a one, the quotient receives a one, and we subtract our seventeen-bit generator. In modulo-two arithmetic, subtraction is bitwise XOR: one XOR one cancels to zero. We bring down the next bit from the dividend. The new leading bit is again a one. The quotient receives a one, and the generator subtracts again. On the third step, our leading bit is a zero. Because this bit is zero, the quotient receives a zero, and we subtract seventeen zeros. XORing with all zeros leaves every bit intact, shifting our working window forward. Step by step, bit by bit, the ladder cascades down. The original ten payload bits are drawn down, leaving behind a sixteen-bit remainder: 1011111011001101. This is our CRC checksum."
     },
-    "scene5": {
-      "title": "Receiver Side Verification (The Clean Invariant)",
+    "scene5_receiverValid": {
+      "title": "Receiver Verification: The Clean Invariant",
       "voice": "bm_george",
       "speed": 1.0,
-      "text": "At the receiving terminal, the twenty-six-bit codeword arrives intact. The receiver has no need to disassemble the packet into data and checksum. Instead, it feeds the entire concatenated sequence into the exact same generator polynomial. Because the checksum was constructed specifically as the mathematical remainder of this polynomial division, the incoming codeword is now an exact algebraic multiple of the generator. Every single non-zero bit cancels out through the XOR chain. When the final bit drops into place, the remainder collapses entirely to sixteen zeros. The receiver confirms zero error."
+      "text": "At the receiving terminal, the twenty-six-bit codeword arrives intact. The receiver does not need to split the message and checksum. Instead, it feeds the entire concatenated sequence into the exact same generator polynomial. Because the checksum was constructed specifically as the mathematical remainder of this polynomial division, the incoming codeword is an exact algebraic multiple of the generator. Every single non-zero bit cancels out through the XOR chain. When the final bit drops into place, the remainder collapses entirely to sixteen zeros. The receiver confirms zero error."
     },
-    "scene6": {
-      "title": "Detecting Corruption (The Non-Zero Syndrome)",
+    "scene6_receiverError": {
+      "title": "Detecting Corruption: The Non-Zero Syndrome",
       "voice": "bm_george",
       "speed": 1.0,
-      "text": "Now observe what happens when noise corrupts the channel. A single bit at the tail flips from a one to a zero. As the receiver computes long division, this single discrepancy alters the downstream XOR calculations. When the division terminates, the remainder does not collapse to zero; it produces a non-zero syndrome: zero zero zero zero zero zero zero zero zero zero zero zero zero zero zero one. Instantly, without ever requesting the original message, the receiver recognizes the violation of polynomial invariance and rejects the packet."
+      "text": "Now observe what happens when noise corrupts the channel. A single bit at the tail flips from a one to a zero. As the receiver computes long division, this single discrepancy alters the downstream XOR calculations. When the division terminates, the remainder does not collapse to zero; it produces a non-zero syndrome: 0000000000000001. Instantly, without ever requesting the original message, the receiver recognizes the violation of polynomial invariance and rejects the packet."
     }
   }
 }
