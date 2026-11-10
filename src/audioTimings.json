@@ -1,38 +1,86 @@
 {
+  "scene1_intro": {
+    "title": "The Channel Noise Paradox",
+    "durationInSeconds": 26.94,
+    "durationInFrames": 809,
+    "sampleRate": 24000,
+    "file": "audio/scene1_intro.wav"
+  },
   "scene1": {
     "title": "The Channel Noise Paradox",
-    "durationInSeconds": 27.97,
-    "durationInFrames": 840,
-    "sampleRate": 24000
+    "durationInSeconds": 26.94,
+    "durationInFrames": 809,
+    "sampleRate": 24000,
+    "file": "audio/scene1_intro.wav"
+  },
+  "scene2_mathTheory": {
+    "title": "Field Theory & Modulo-2 Arithmetic",
+    "durationInSeconds": 34.28,
+    "durationInFrames": 1029,
+    "sampleRate": 24000,
+    "file": "audio/scene2_mathTheory.wav"
   },
   "scene2": {
     "title": "Field Theory & Modulo-2 Arithmetic",
-    "durationInSeconds": 32.0,
-    "durationInFrames": 960,
-    "sampleRate": 24000
+    "durationInSeconds": 34.28,
+    "durationInFrames": 1029,
+    "sampleRate": 24000,
+    "file": "audio/scene2_mathTheory.wav"
+  },
+  "scene3_frameSetup": {
+    "title": "Structuring the Dividend & Degree-16 Generator",
+    "durationInSeconds": 36.97,
+    "durationInFrames": 1110,
+    "sampleRate": 24000,
+    "file": "audio/scene3_frameSetup.wav"
   },
   "scene3": {
-    "title": "Structuring the Dividend & The Degree-16 Generator",
-    "durationInSeconds": 40.36,
-    "durationInFrames": 1211,
-    "sampleRate": 24000
+    "title": "Structuring the Dividend & Degree-16 Generator",
+    "durationInSeconds": 36.97,
+    "durationInFrames": 1110,
+    "sampleRate": 24000,
+    "file": "audio/scene3_frameSetup.wav"
+  },
+  "scene4_divisionWalkthrough": {
+    "title": "Sender Long Division Walkthrough",
+    "durationInSeconds": 68.18,
+    "durationInFrames": 2046,
+    "sampleRate": 24000,
+    "file": "audio/scene4_divisionWalkthrough.wav"
   },
   "scene4": {
-    "title": "The Modulo-2 Long Division Engine (Sender Side)",
-    "durationInSeconds": 51.81,
-    "durationInFrames": 1555,
-    "sampleRate": 24000
+    "title": "Sender Long Division Walkthrough",
+    "durationInSeconds": 68.18,
+    "durationInFrames": 2046,
+    "sampleRate": 24000,
+    "file": "audio/scene4_divisionWalkthrough.wav"
+  },
+  "scene5_receiverValid": {
+    "title": "Receiver Verification: The Clean Invariant",
+    "durationInSeconds": 36.67,
+    "durationInFrames": 1101,
+    "sampleRate": 24000,
+    "file": "audio/scene5_receiverValid.wav"
   },
   "scene5": {
-    "title": "Receiver Side Verification (The Clean Invariant)",
-    "durationInSeconds": 39.06,
-    "durationInFrames": 1172,
-    "sampleRate": 24000
+    "title": "Receiver Verification: The Clean Invariant",
+    "durationInSeconds": 36.67,
+    "durationInFrames": 1101,
+    "sampleRate": 24000,
+    "file": "audio/scene5_receiverValid.wav"
+  },
+  "scene6_receiverError": {
+    "title": "Detecting Corruption: The Non-Zero Syndrome",
+    "durationInSeconds": 35.05,
+    "durationInFrames": 1052,
+    "sampleRate": 24000,
+    "file": "audio/scene6_receiverError.wav"
   },
   "scene6": {
-    "title": "Detecting Corruption (The Non-Zero Syndrome)",
-    "durationInSeconds": 35.14,
-    "durationInFrames": 1055,
-    "sampleRate": 24000
+    "title": "Detecting Corruption: The Non-Zero Syndrome",
+    "durationInSeconds": 35.05,
+    "durationInFrames": 1052,
+    "sampleRate": 24000,
+    "file": "audio/scene6_receiverError.wav"
   }
 }
