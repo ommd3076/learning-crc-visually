@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRC-16-CCITT Interactive 3B1B Division Simulator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 40px;
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Computer Modern', 'Latin Modern Roman', 'Times New Roman', serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 { margin: 0 0 8px 0; font-size: 38px; font-weight: normal; }
+    p.subtitle { margin: 0 0 24px 0; font-size: 18px; color: #888888; }
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    button {
+      background: #111111;
+      border: 1px solid #333333;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    button:hover {
+      background: #222222;
+      border-color: #58c4dd;
+      color: #58c4dd;
+    }
+    .status {
+      font-family: monospace;
+      font-size: 16px;
+      color: #f4d03f;
+    }
+    #ladderCanvas {
+      width: 100%;
+      max-width: 1200px;
+      background: #000000;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid #1a1a1a;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+    .dividend-row { letter-spacing: 4px; color: #ffffff; margin-bottom: 8px; }
+    .divisor-text { color: #58c4dd; }
+    .gold { color: #f4d03f; }
+    .mint { color: #83c99e; }
+    .gray { color: #555555; }
+    .salmon { color: #ff6b6b; }
+  </style>
+</head>
+<body>
+
+  <h1>Cyclic Redundancy Check (CRC-16) Division Simulator</h1>
+  <p class="subtitle">An interactive 3Blue1Brown-style representation of Galois Field GF(2) long division</p>
+
+  <div class="controls">
+    <button onclick="stepBack()">◀ Prev Step</button>
+    <button onclick="stepForward()">Step Forward ▶</button>
+    <button onclick="toggleAuto()" id="autoBtn">▶ Auto Play</button>
+    <button onclick="resetDiv()">↺ Reset</button>
+    <span class="status" id="stepIndicator">Cycle 0 of 10</span>
+  </div>
+
+  <div id="ladderCanvas"></div>
+
+  <script>
+    const DIVIDEND = "11010110110000000000000000";
+    const DIVISOR = "10001000000100001";
+    let currentStep = 0;
+    let autoInterval = null;
+
+    function computeSteps() {
+      const cur = DIVIDEND.split("");
+      const steps = [];
+      for (let i = 0; i < 10; i++) {
+        const lead = cur[i];
+        const isPoly = lead === "1";
+        const sub = isPoly ? DIVISOR : "0".repeat(17);
+        for (let j = 0; j < 17; j++) {
+          cur[i + j] = cur[i + j] === sub[j] ? "0" : "1";
+        }
+        steps.push({
+          step: i,
+          quotientBit: lead,
+          isPoly,
+          subtrahend: sub,
+          res: cur.slice(i, i + 17).join(""),
+          pulled: i + 17 < DIVIDEND.length ? DIVIDEND[i + 17] : null
+        });
+      }
+      return steps;
+    }
+
+    const allSteps = computeSteps();
+
+    function render() {
+      const canvas = document.getElementById("ladderCanvas");
+      document.getElementById("stepIndicator").innerText = `Cycle ${currentStep} of 10`;
+
+      let qStr = allSteps.slice(0, currentStep).map(s => s.quotientBit).join(" ");
+      let html = `<div style="color:#888888; margin-bottom: 4px;">Quotient Q(x): <span class="gold">${qStr || "—"}</span></div>`;
+      html += `<div style="border-bottom: 2px solid #ffffff; padding-bottom: 4px; margin-bottom: 12px;">`;
+      html += `<span class="divisor-text">Divisor: ${DIVISOR}</span> ) <b>${DIVIDEND}</b>`;
+      html += `</div>`;
+
+      for (let i = 0; i < currentStep; i++) {
+        const s = allSteps[i];
+        const indent = "&nbsp;".repeat(i * 2);
+        const subColor = s.isPoly ? "divisor-text" : "gray";
+        html += `<div>${indent}⊕ <span class="${subColor}">${s.subtrahend}</span></div>`;
+        html += `<div>${indent}-----------------------------------</div>`;
+        const resText = s.res.substring(1);
+        const pulledText = s.pulled !== null ? `<span class="gold"> ↓${s.pulled}</span>` : "";
+        html += `<div>${indent}&nbsp;&nbsp;${resText}${pulledText}</div><br>`;
+      }
+
+      if (currentStep === 10) {
+        html += `<div style="margin-top: 16px; padding: 12px; border: 2px solid #83c99e; border-radius: 8px; color: #83c99e;">`;
+        html += `<b>CRC-16 Remainder: 1011111011001101</b> (Codeword Accepted)`;
+        html += `</div>`;
+      }
+
+      canvas.innerHTML = html;
+    }
+
+    function stepForward() {
+      if (currentStep < 10) { currentStep++; render(); }
+    }
+
+    function stepBack() {
+      if (currentStep > 0) { currentStep--; render(); }
+    }
+
+    function resetDiv() {
+      currentStep = 0;
+      if (autoInterval) toggleAuto();
+      render();
+    }
+
+    function toggleAuto() {
+      const btn = document.getElementById("autoBtn");
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        btn.innerText = "▶ Auto Play";
+      } else {
+        btn.innerText = "⏸ Pause";
+        autoInterval = setInterval(() => {
+          if (currentStep < 10) { stepForward(); }
+          else { toggleAuto(); }
+        }, 1200);
+      }
+    }
+
+    window.onload = render;
+  </script>
+</body>
+</html>
