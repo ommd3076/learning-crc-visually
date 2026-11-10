@@ -1,0 +1,8 @@
+node_modules/
+scripts/tts_assets/
+output/
+.remotion/
+dist/
+*.log
+.DS_Store
+Thumbs.db

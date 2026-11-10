@@ -1,0 +1,27 @@
+{
+  "name": "learning-crc-visually",
+  "version": "1.0.0",
+  "description": "3Blue1Brown-style programmatic explainer of Cyclic Redundancy Check (CRC-16-CCITT) with zero dead-air audio synchronization",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "build": "remotion bundle src/index.ts",
+    "render": "remotion render src/index.ts CrcExplainer output/crc_3b1b_explainer.mp4 --gl=angle",
+    "render-fast": "remotion render src/index.ts CrcExplainer output/crc_3b1b_explainer.mp4 --gl=angle --scale=0.5",
+    "generate-audio": "python scripts/generate_audio.py"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.542",
+    "@remotion/cli": "^4.0.542",
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "remotion": "^4.0.542"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.2"
+  },
+  "license": "MIT"
+}
