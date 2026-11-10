@@ -1,76 +1,76 @@
 # Learning CRC Visually (Cyclic Redundancy Check)
 
-> A programmatic, 1080p 30fps mathematical explanation of Cyclic Redundancy Check (CRC-16 / CCITT) in the pedagogical style of **3Blue1Brown (Grant Sanderson)**, powered by **Remotion** and local **Kokoro-82M TTS** with **Zero Dead-Air (Continuous Audio Synchronization)**.
+> An authentic **3Blue1Brown (Grant Sanderson / Manim style)** educational video explaining **Cyclic Redundancy Check (CRC-16 / CCITT)** from first principles, engineered under the **Argon Architectural Specification** with **pure black void canvas**, **pristine KaTeX mathematics**, and **Zero Dead-Air (Continuous Audio Synchronization)**.
 
 ---
 
 ## 📐 Mathematical Ground Truth & Lab Notebook Benchmark
 
-This project programmatically animates and proves the exact binary modulo-2 long division verified in the laboratory notebook:
+This explainer models and proves the exact binary modulo-2 long division verified in the laboratory notebook:
 
-### 1. Specification & Parameters
+### 1. Parameters & Specification
 - **Dataword ($D$)**: `1101011011` (10 bits)
-- **Generator Polynomial ($G(x)$)**: CRC-16 / CRC-CCITT standard:
-  $$G(x) = x^{16} + x^{12} + x^{5} + 1$$
-  - Bit Vector (17 bits): `10001000000100001`
-  - Degree ($r$): `16`
+- **Generator Polynomial ($G(x)$)**: CRC-16 / CRC-CCITT:
+  $$G(x) = x^{16} + x^{12} + x^5 + 1 \longleftrightarrow \texttt{10001000000100001}_2 \quad (\deg = 16)$$
 - **Augmented Dividend**:
   $$D(x) \cdot x^{16} = \texttt{11010110110000000000000000} \quad \text{(26 bits: 10 data + 16 zeros)}$$
 
-### 2. Sender Long Division Result
-- Binary Modulo-2 (XOR) long division yields quotient $Q = \texttt{1101101101}$
-- **Exact CRC Remainder ($R$)**: `1011111011001101` (16 bits)
-- **Transmitted Codeword ($T$)**:
-  $$T = D \mathbin{\Vert} \text{CRC} = \texttt{11010110111011111011001101}$$
+### 2. Classic Handwritten Division Bracket Layout
 
-### 3. Receiver Verification Scenarios
-- **Scenario A (Clean Intact Transmission)**:
-  - Input: `11010110111011111011001101`
-  - Long division by $G(x)$ yields remainder `0000000000000000` (16 zeros) $\rightarrow$ **Accepted**.
-- **Scenario B (Single Tail Bit Corruption)**:
-  - Input: `11010110111011111011001100` (last bit flipped $1 \rightarrow 0$)
-  - Long division by $G(x)$ yields non-zero syndrome remainder `0000000000000001` $\rightarrow$ **Rejected**.
+$$\begin{array}{r@{\quad}l}
+\text{Quotient:} & \texttt{1 1 0 1 0 1 1 0 1 1} \\
+\text{Divisor} \quad \texttt{10001000000100001} & \overline{\smash{\big)}\; \texttt{1101011011 0000000000000000}}
+\end{array}$$
 
----
-
-## 🎙️ Zero Dead-Air Audio Synchronization Architecture
-
-1. **Strict Audio-Driven Timeline**: Under no circumstance is there silent negative space or animation without voiceover.
-2. **Dynamic Clamping**:
-   $$\text{durationInFrames} = \lceil\text{audioDurationSeconds} \times 30\rceil$$
-3. **Continuous Acoustic Bed**: Subtle, warm ambient drone pad (`public/audio/ambient_bed.mp3` at `0.08` volume) loops continuously behind the academic voiceover.
-4. **Local TTS Engine (Kokoro-82M)**: High-fidelity speech synthesized offline using ONNX runtime and voice `bm_george`. Exact timings are probed via `soundfile` and exported directly into `src/audioTimings.json`.
+#### Deterministic Iteration Logic across 10 Cycles:
+For each cycle $k \in [0, 9]$:
+1. **Evaluate Leading Bit of Active Window**:
+   - **Case `1`**: Quotient bit $\rightarrow \texttt{1}$, Subtrahend is Generator $\texttt{10001000000100001}$ (in 3B1B Blue `#58c4dd`), XOR cancels leading bit to $0$.
+   - **Case `0`**: Quotient bit $\rightarrow \texttt{0}$, Subtrahend is Seventeen Zeros $\texttt{00000000000000000}$ (in Muted Gray `#555555`), XOR leaves bits unchanged.
+2. **Bring Down Next Bit**:
+   - Next bit from top dividend row drops down via animated glowing vertical dashed arrow (`#f4d03f`).
+3. **Repeat** across all 10 cycles until final 16-bit remainder is forged:
+   $$\text{CRC Remainder } R(x) = \texttt{1011111011001101}_2 \quad (\text{Mint Green } \#83c99e)$$
+4. **Transmitted Codeword ($T$)**:
+   $$T = D \mathbin{\Vert} R = \texttt{11010110111011111011001101} \quad (26\text{ bits})$$
 
 ---
 
-## 🎬 Narrative Scenes Breakdown
+## 🎨 Authentic 3Blue1Brown Aesthetic
+- **Solid Pitch-Black Canvas**: Pure `#000000` void (no cards, no container borders, no UI badges, no telemetry HUD).
+- **Computer Modern LaTeX Typography**: Rendered via KaTeX (`katex/dist/katex.min.css`) with classic mathematical serif fonts.
+- **Grant Sanderson Palette**:
+  - Math Baseline: `#ffffff`
+  - Generator Divisor: `#58c4dd`
+  - Active Bits / Pulldown Arrows: `#f4d03f`
+  - Zero Subtrahend Rows: `#555555`
+  - Remainder / Clean Validation: `#83c99e`
+  - Error Indicator / Non-Zero Syndrome: `#ff6b6b`
+- **Dynamic Camera Kinematics**: Viewport smoothly translates upward (`translateY`) with `spring()` physics as the division ladder cascades, keeping the active XOR row centered in the viewer's focal area.
+
+---
+
+## 🎙️ Zero Dead-Air Audio Synchronization
+
+$$\text{durationInFrames} = \lceil\text{audioDurationSeconds} \times 30\rceil$$
+
+Every Remotion sequence duration is strictly clamped to studio-quality narration synthesized offline with **Kokoro-82M ONNX** (voice `bm_george`), accompanied by a continuous warm harmonic ambient acoustic bed (`ambient_bed.mp3` at `0.08` volume).
 
 | Scene | Title | Timing (s) | Frame Count (30fps) | Focus |
 |---|---|---|---|---|
-| **Act 1** | The Channel Noise Paradox | 27.97s | 840 | Parity check failure under 2-bit burst error |
-| **Act 2** | Field Theory & Modulo-2 Arithmetic | 32.00s | 960 | Galois Field $\text{GF}(2)$, $1 \oplus 1 = 0$, no carries |
-| **Act 3** | Structuring the Dividend & Degree-16 Generator | 40.36s | 1211 | $x^{16} + x^{12} + x^5 + 1$ mapping & 16 zero padding |
-| **Act 4** | The Modulo-2 Long Division Engine | 51.81s | 1555 | Sender 10-step division ladder yielding remainder `1011111011001101` |
-| **Act 5** | Receiver Verification: Clean Invariant | 39.06s | 1172 | Error-free codeword reduction to 16 zeros |
-| **Act 6** | Detecting Corruption: The Non-Zero Syndrome | 35.14s | 1055 | Corrupted tail bit yielding non-zero syndrome `...0001` |
-| **Total** | **Complete Feature Explainer** | **226.34s** | **6793 frames** | **Zero dead air across ~3m 46s** |
+| **Scene 1** | The Channel Noise Paradox | 26.94s | 809 | 2-bit burst error parity blind spot |
+| **Scene 2** | Field Theory & Modulo-2 Arithmetic | 34.28s | 1029 | Galois Field $\text{GF}(2)$, $1 \oplus 1 = 0$, no carries |
+| **Scene 3** | Structuring the Dividend & Degree-16 Generator | 36.97s | 1110 | $x^{16} + x^{12} + x^5 + 1$ mapping & 16 zero padding |
+| **Scene 4** | Sender Long Division Walkthrough | 68.18s | 2046 | 10-cycle ladder with 1-vs-0 subtrahend logic |
+| **Scene 5** | Receiver Verification: Clean Invariant | 36.67s | 1101 | $T(x) \pmod{G(x)} \equiv 0$, 16 zeros remainder |
+| **Scene 6** | Detecting Corruption: Non-Zero Syndrome | 35.05s | 1052 | Bit 25 flipped, syndrome $\texttt{...0001} \neq 0$ |
+| **Total** | **Crc3B1BExplainer** | **238.23s** | **7147 frames** | **Continuous ~4min audio-visual explainer** |
 
 ---
 
-## 🚀 Quickstart & Commands
+## 🚀 Commands
 
-### Prerequisites
-- Node.js $\ge 18$
-- Python $\ge 3.10$ with `kokoro-onnx` and `soundfile`
-- FFmpeg (on system PATH)
-
-### Install Dependencies
-```bash
-npm install
-pip install kokoro-onnx soundfile sounddevice
-```
-
-### Synthesize Audio Tracks
+### Synthesize Audio
 ```bash
 npm run generate-audio
 ```
@@ -80,19 +80,7 @@ npm run generate-audio
 npm run start
 ```
 
-### Render 1080p 30fps Video
+### Render Full 1080p 30fps Video
 ```bash
 npm run render
 ```
-or rapid preview render:
-```bash
-npm run render-fast
-```
-
----
-
-## 🎨 3Blue1Brown Visual Aesthetics
-- **Dark Slate Background**: `#0d1117` with subtle coordinate grid overlay.
-- **Accents**: 3B1B Cyan (`#38bdf8`), Gold (`#facc15`), Emerald (`#22c55e`), Coral (`#ef4444`).
-- **Typography**: Monospace (`JetBrains Mono`) for polynomials, bit vectors, and registers; Clean Sans (`Inter`) for conceptual hierarchy.
-- **Kinematics**: Smooth Remotion physics-based spring dampening for cards and cascading ladder rows.
