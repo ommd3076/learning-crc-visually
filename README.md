@@ -4,7 +4,7 @@
 ### An Authentic 3Blue1Brown-Style Programmatic Explainer in Remotion & KaTeX
 
 [![GitHub Release](https://img.shields.io/github/v/release/ommd3076/learning-crc-visually?color=58c4dd&logo=github)](https://github.com/ommd3076/learning-crc-visually/releases/tag/v1.0.0)
-[![Video Duration](https://img.shields.io/badge/Duration-3m%2058s-f4d03f?logo=youtube)](https://github.com/ommd3076/learning-crc-visually/releases/download/v1.0.0/crc_3b1b_explainer.mp4)
+[![Video Duration](https://img.shields.io/badge/Duration-3m%2058s-f4d03f?logo=youtube)](https://github.com/ommd3076/learning-crc-visually/raw/main/docs/assets/crc_3b1b_explainer.mp4)
 [![Resolution](https://img.shields.io/badge/1080p-30fps-83c99e)]()
 [![Remotion](https://img.shields.io/badge/Powered%20By-Remotion%204.0-0b84fe?logo=react)]()
 [![Zero Dead Air](https://img.shields.io/badge/Audio-Kokoro--82M%20Synchronized-ff6b6b)]()
@@ -19,28 +19,28 @@
 
 ---
 
-### 🎥 Watch Full 1080p 30fps Explainer Video (~4 mins)
+## 🎬 Watch the Full 1080p 30fps Explainer Video
 
-<a href="https://github.com/ommd3076/learning-crc-visually/releases/download/v1.0.0/crc_3b1b_explainer.mp4">
-  <img src="docs/assets/crc_ladder_preview.gif" alt="CRC-16 Long Division Ladder Preview" width="850" />
-</a>
+https://github.com/ommd3076/learning-crc-visually/raw/main/docs/assets/crc_3b1b_explainer.mp4
 
 <br />
 
+<a href="https://github.com/ommd3076/learning-crc-visually/raw/main/docs/assets/crc_3b1b_explainer.mp4">
+  <img src="docs/assets/crc_ladder_preview.gif" alt="CRC-16 Long Division Ladder Preview" width="900" />
+</a>
+
 <p align="center">
-  <b>▶️ Click the animation above to download or stream the full high-fidelity video:</b><br />
-  <code><a href="https://github.com/ommd3076/learning-crc-visually/releases/download/v1.0.0/crc_3b1b_explainer.mp4">Download 1080p MP4 (36.4 MB) • GitHub v1.0.0 Release Asset</a></code>
+  <a href="https://github.com/ommd3076/learning-crc-visually/raw/main/docs/assets/crc_3b1b_explainer.mp4">
+    <img src="https://img.shields.io/badge/▶%20Click%20To%20Play%20%2F%20Download%20Full%20Video-1080p%2030fps%20(36MB)-58c4dd?style=for-the-badge" alt="Download Video" height="42" />
+  </a>
+</p>
+
+<p align="center">
+  <b>Full Video Direct Path in Repo:</b> <code><a href="docs/assets/crc_3b1b_explainer.mp4">docs/assets/crc_3b1b_explainer.mp4</a></code> (36.4 MB)<br />
+  <b>Direct Raw Streaming Link:</b> <code><a href="https://github.com/ommd3076/learning-crc-visually/raw/main/docs/assets/crc_3b1b_explainer.mp4">raw/main/docs/assets/crc_3b1b_explainer.mp4</a></code>
 </p>
 
 </div>
-
----
-
-## 🎬 Video Player (HTML5)
-
-https://github.com/ommd3076/learning-crc-visually/releases/download/v1.0.0/crc_3b1b_explainer.mp4
-
-> *If your browser supports HTML5 inline media, the video will stream directly above. You can also view the [GitHub Release](https://github.com/ommd3076/learning-crc-visually/releases/tag/v1.0.0).*
 
 ---
 
