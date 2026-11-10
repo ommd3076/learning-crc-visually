@@ -1,0 +1,38 @@
+{
+  "scene1": {
+    "title": "The Channel Noise Paradox",
+    "durationInSeconds": 27.97,
+    "durationInFrames": 840,
+    "sampleRate": 24000
+  },
+  "scene2": {
+    "title": "Field Theory & Modulo-2 Arithmetic",
+    "durationInSeconds": 32.0,
+    "durationInFrames": 960,
+    "sampleRate": 24000
+  },
+  "scene3": {
+    "title": "Structuring the Dividend & The Degree-16 Generator",
+    "durationInSeconds": 40.36,
+    "durationInFrames": 1211,
+    "sampleRate": 24000
+  },
+  "scene4": {
+    "title": "The Modulo-2 Long Division Engine (Sender Side)",
+    "durationInSeconds": 51.81,
+    "durationInFrames": 1555,
+    "sampleRate": 24000
+  },
+  "scene5": {
+    "title": "Receiver Side Verification (The Clean Invariant)",
+    "durationInSeconds": 39.06,
+    "durationInFrames": 1172,
+    "sampleRate": 24000
+  },
+  "scene6": {
+    "title": "Detecting Corruption (The Non-Zero Syndrome)",
+    "durationInSeconds": 35.14,
+    "durationInFrames": 1055,
+    "sampleRate": 24000
+  }
+}
