@@ -37,7 +37,7 @@ export const Scene2: React.FC = () => {
             </div>
 
             <p style={{ margin: "0 0 16px 0", fontSize: 15, color: THEME.colors.textSecondary, lineHeight: 1.5 }}>
-              In ordinary arithmetic, addition generates carries ($1 + 1 = 10_2$). In $\text{GF}(2)$, operations operate purely on polynomial coefficients modulo two:
+              In ordinary arithmetic, addition generates carries (1 + 1 = 10 in binary). In Galois Field GF(2), operations operate purely on polynomial coefficients modulo two:
             </p>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
